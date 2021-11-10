@@ -16,7 +16,11 @@ app.use(bodyParser.urlencoded({
 //require routes
 var Home = require('./routers/Home');
 var Register = require('./routers/Register');
+var Login = require('./routers/Login');
+var GetDataUser = require('./routers/GetDataUser');
 
 //use routes
 app.use('/',Home);
 app.use('/Register',Register);
+app.use('/Login',Login);
+app.use('/GetDataUser',GetDataUser);

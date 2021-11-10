@@ -1,4 +1,4 @@
-var db = require("../dbconnection");
+const db = require("../dbconnection");
 
 var Register = {
   getcheckEmail: function (email, callback) {

@@ -6,11 +6,13 @@ const Register = require("../models/Register");
 router.post("/PostRegister", async function (req, res, next) {
   let email = req.body.email;
 
-  let checkEmail = await getcheckEmail(email);
+  let checkEmail = await getcheckEmail(email); //เช็คอีเมล
 
+  //เช็คว่าอีเมลซ้ำไหม
   if (checkEmail[0].count > 0) {
     res.json({ status: "Failed", data: "Duplicate_Email" });
   } else {
+    //เข้ารหัสผ่าน
     let hashPW = await bcrypt.hash(req.body.password, 10);
     let regisStatus = await postdataUser(req.body, hashPW);
     if (regisStatus) {
@@ -28,11 +30,11 @@ async function getcheckEmail(email) {
         if (rows != null) {
           resolve(rows.rows);
         } else {
-          console.log(err);
           resolve(null);
         }
       });
     } catch (err) {
+      console.log(err);
       resolve(false);
     }
   });
@@ -50,6 +52,7 @@ async function postdataUser(data, password) {
         }
       });
     } catch (err) {
+      console.log(err);
       resolve(false);
     }
   });
