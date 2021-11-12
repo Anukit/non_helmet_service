@@ -3,7 +3,7 @@ const db = require("../dbconnection");
 var Register = {
   getcheckEmail: function (email, callback) {
     return db.query(
-      `SELECT COUNT("id") FROM db_project."users" WHERE email = '${email}'`,
+      `SELECT COUNT("id") FROM db_project."users" WHERE email = '${email}' AND active = 1`,
       callback
     );
   },
