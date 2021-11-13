@@ -18,7 +18,7 @@ router.post("/PostRegister", async function (req, res, next) {
     if (regisStatus) {
       res.json({ status: "Succeed", data: "Succeed" });
     } else {
-      res.json({ status: "Failed", data: "RigisError" });
+      res.json({ status: "Failed", data: "RegisError" });
     }
   }
 });
