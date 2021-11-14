@@ -22,6 +22,7 @@ var Login = require("./routers/Login");
 var GetDataUser = require("./routers/GetDataUser");
 var EditProfile = require("./routers/EditProfile");
 var AboutFile = require("./routers/AboutFile");
+var ChangePassword = require("./routers/ChangePassword");
 
 //use routes
 app.use("/", Home);
@@ -30,5 +31,6 @@ app.use("/Login", Login);
 app.use("/GetDataUser", GetDataUser);
 app.use("/EditProfile", EditProfile);
 app.use("/AboutFile", AboutFile);
+app.use("/ChangePW", ChangePassword);
 
 app.use(express.static("uploads")); //สำหรับโชว์รูปภาพใน service

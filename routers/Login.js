@@ -20,10 +20,12 @@ router.post("/PostLogin", async function (req, res, next) {
         let hashPW = checkPW[0].password; //รหัสผ่านใน DB
         const match = await bcrypt.compare(password, hashPW); //เปรียบเทียบรหัสผ่าน
         if (match) {
-          let idUser = await getIdUser(email, hashPW); //เช็ครหัสผ่าน
-          res.json({ status: "Succeed", data: idUser });
+          let idUser = await getIdUser(email, hashPW); //ดึงไอดีผู้ใช้
+          if (idUser != false) {
+            res.json({ status: "Succeed", data: idUser });
+          } else res.json({ status: "Failed", data: "Error Get id user" });
         } else res.json({ status: "Failed", data: "Incorrect password" });
-      } else res.json({ status: "Failed", data: "Error" });
+      } else res.json({ status: "Failed", data: "Error Check password fail" });
     } else res.json({ status: "Failed", data: "Invalid email" });
   }
 });

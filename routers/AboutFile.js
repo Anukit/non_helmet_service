@@ -30,14 +30,14 @@ router.post("/uploadImage", async function (req, res, next) {
     } else if (err) {
       return res.status(500).json(err);
     }
-    
+
     if (req.file != undefined) {
       AboutFile.updateImage(
         req.file.filename,
         Number(req.file.originalname.split("_")[0]),
         (err, rows) => {
           if (err) {
-            res.json({ status: "Failed", data: err });
+            res.json({ status: "Failed", data: "update data Image fail" });
           } else {
             res.json({ status: "Succeed", data: "Succeed" });
           }

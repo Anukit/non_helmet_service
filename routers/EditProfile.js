@@ -7,7 +7,7 @@ router.post("/PostEditProfile", async function (req, res, next) {
   if (editprofile) {
     res.json({ status: "Succeed", data: "Succeed" });
   } else {
-    res.json({ status: "Failed", data: "Error" });
+    res.json({ status: "Failed", data: "Error EditProfile fail" });
   }
 });
 
