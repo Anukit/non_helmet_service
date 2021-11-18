@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 var nodemailer = require("nodemailer");
 const Register = require("../models/Register");
-const ForgotPW = require("../models/forgotpassword");
+const ForgotPW = require("../models/Forgotpassword");
 const bcrypt = require("bcrypt");
 
 router.post("/PostReqOTP", async function (req, res, next) {

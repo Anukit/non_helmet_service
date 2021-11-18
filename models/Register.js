@@ -15,7 +15,8 @@ var Register = {
     return db.query(
       `INSERT INTO db_project."users"(
         email, firstname, lastname, password, role, active, create_at, update_at)
-        VALUES ('${email}', '${firstname}', '${lastname}', '${password}', 1, 1, '${datetime}', '${datetime}')`,
+        VALUES ('${email}', '${firstname}', '${lastname}', '${password}', 1, 0, '${datetime}', '${datetime}')
+        RETURNING id AS user_id`,
       callback
     );
   },

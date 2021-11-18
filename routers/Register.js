@@ -15,8 +15,9 @@ router.post("/PostRegister", async function (req, res, next) {
     //เข้ารหัสผ่าน
     let hashPW = await bcrypt.hash(req.body.password, 10);
     let regisStatus = await postdataUser(req.body, hashPW);
-    if (regisStatus) {
-      res.json({ status: "Succeed", data: "Succeed" });
+    console.log(regisStatus[0].user_id);
+    if (regisStatus != false) {
+      res.json({ status: "Succeed", data: regisStatus });
     } else {
       res.json({ status: "Failed", data: "RegisError" });
     }
@@ -30,7 +31,7 @@ async function getcheckEmail(email) {
         if (rows != null) {
           resolve(rows.rows);
         } else {
-          resolve(null);
+          resolve(false);
         }
       });
     } catch (err) {
@@ -44,11 +45,10 @@ async function postdataUser(data, password) {
   return new Promise((resolve, reject) => {
     try {
       Register.postdataUser(data, password, (err, rows) => {
-        if (err) {
-          console.log(err);
-          resolve(false);
+        if (rows != null) {
+          resolve(rows.rows);
         } else {
-          resolve(true);
+          resolve(false);
         }
       });
     } catch (err) {
