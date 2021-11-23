@@ -8,7 +8,7 @@ var ForgotPW = {
     return db.query(
       `UPDATE db_project."users"
       SET password = '${new_hashPW}', update_at = '${datetime}'
-      WHERE email = '${email}' AND active = 1`,
+      WHERE email = '${email}' AND active = 1 AND is_verified = 1`,
       callback
     );
   },

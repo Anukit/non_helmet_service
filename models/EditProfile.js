@@ -9,7 +9,7 @@ var EditProfile = {
     return db.query(
       `UPDATE db_project."users"
       SET firstname = '${firstname}', lastname = '${lastname}', update_at = '${datetime}'
-      WHERE id = ${user_id} AND active = 1`,
+      WHERE id = ${user_id} AND active = 1 AND is_verified = 1`,
       callback
     );
   },
@@ -18,7 +18,7 @@ var EditProfile = {
     return db.query(
       `UPDATE db_project."users"
       SET image_profile = '${image_profile}'
-      WHERE id = ${user_id} AND active = 1`,
+      WHERE id = ${user_id} AND active = 1 AND is_verified = 1`,
       callback
     );
   },

@@ -3,7 +3,7 @@ const db = require("../dbconnection");
 var GetDataUser = {
   getcheckEmail: function (email, callback) {
     return db.query(
-      `SELECT id FROM db_project."users" WHERE email = '${email}' AND active = 1`,
+      `SELECT id FROM db_project."users" WHERE email = '${email}' AND active = 1 AND is_verified = 1`,
       callback
     );
   },
@@ -27,7 +27,7 @@ var GetDataUser = {
     let datetime = data.datetime;
     return db.query(
       `UPDATE db_project."users"
-      SET active = 1 , otp = null, update_at = '${datetime}'
+      SET active = 1 , otp = null, update_at = '${datetime}', is_verified = 1
       WHERE id = '${user_id}'`,
       callback
     );

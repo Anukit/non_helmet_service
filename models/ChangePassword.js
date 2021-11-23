@@ -5,7 +5,7 @@ var ChangePW = {
   checkPassword: function (user_id, callback) {
     //console.log(username);
     return db.query(
-      `SELECT password FROM db_project."users" where id = '${user_id}' AND active = 1`,
+      `SELECT password FROM db_project."users" where id = '${user_id}' AND active = 1 AND is_verified = 1`,
       callback
     );
   },
@@ -15,7 +15,7 @@ var ChangePW = {
     return db.query(
       `UPDATE db_project."users"
       SET password = '${new_hashPW}', update_at = '${datetime}'
-      WHERE id = ${user_id} AND active = 1`,
+      WHERE id = ${user_id} AND active = 1 AND is_verified = 1`,
       callback
     );
   },

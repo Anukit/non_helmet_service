@@ -5,7 +5,7 @@ var AboutFile = {
     return db.query(
       `UPDATE db_project."users"
       SET image_profile = '${image_profile}'
-      WHERE id = ${user_id} AND active = 1`,
+      WHERE id = ${user_id} AND active = 1 AND is_verified = 1`,
       callback
     );
   },
