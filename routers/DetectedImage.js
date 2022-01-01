@@ -10,11 +10,11 @@ var DIR = `././uploads/detectedImage`;
 //รับข้อมูลสถิติการตรวจจับ
 router.get("/getAmountRider/:user_id?", async function (req, res, next) {
   let user_id = req.params.user_id;
-  let countAllRider;
+  let countAllRider = 0;
   let countMeRider = 0;
 
   let data = await getAmountRider();
-  if (data != false) {
+  if (data.length > 0) {
     for (let index = 0; index < data.length; index++) {
       if (data[index]["request_user"] == user_id) {
         countMeRider += 1;
@@ -28,7 +28,14 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
         countMeRider: countMeRider,
       },
     });
-  } else res.json({ status: "Failed", data: "Error" });
+  } else
+    res.json({
+      status: "Succeed",
+      data: {
+        countAllRider: countAllRider,
+        countMeRider: countMeRider,
+      },
+    });
 });
 
 //รับข้อมูลรูปภาพที่ถูกตรวจจับ
