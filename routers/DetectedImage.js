@@ -10,30 +10,72 @@ var DIR = `././uploads/detectedImage`;
 //รับข้อมูลสถิติการตรวจจับ
 router.get("/getAmountRider/:user_id?", async function (req, res, next) {
   let user_id = req.params.user_id;
-  let countAllRider = 0;
-  let countMeRider = 0;
+
+  //ผู้ใช้คน ๆ นั้น
+  let countMeRidertoday = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมารายวัน
+  let countMeRidertomonth = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมารายเดือน
+  let countMeRidertotal = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมาทั้งหมด
+  //ผู้ใช้ทั้งหมด
+  let countAllRidertoday = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมารายวัน
+  let countAllRidertomonth = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมารายเดือน
+  let countAllRidertotal = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมาทั้งหมด
 
   let data = await getAmountRider();
+  let today = new Date();
+
   if (data.length > 0) {
     for (let index = 0; index < data.length; index++) {
+      let datetimeDB = new Date(data[index]["detection_at"]);
+
       if (data[index]["request_user"] == user_id) {
-        countMeRider += 1;
+        //ผู้ใช้คนนั้น ๆ
+        if (today.toDateString() == datetimeDB.toDateString()) {
+          countMeRidertoday += 1;
+        }
+        if (today.getMonth() == datetimeDB.getMonth()) {
+          countMeRidertomonth += 1;
+        }
+        countMeRidertotal += 1;
       }
+      //ผู้ใช้ทั้งหมด
+      if (today.toDateString() == datetimeDB.toDateString()) {
+        countAllRidertoday += 1;
+      }
+      if (today.getMonth() == datetimeDB.getMonth()) {
+        countAllRidertomonth += 1;
+      }
+      countAllRidertotal += 1;
     }
-    countAllRider = data.length;
+
     res.json({
       status: "Succeed",
       data: {
-        countAllRider: countAllRider,
-        countMeRider: countMeRider,
+        countMeRider: {
+          today: countMeRidertoday,
+          tomonth: countMeRidertomonth,
+          total: countMeRidertotal,
+        },
+        countAllRider: {
+          today: countAllRidertoday,
+          tomonth: countAllRidertomonth,
+          total: countAllRidertotal,
+        },
       },
     });
   } else
     res.json({
       status: "Succeed",
       data: {
-        countAllRider: countAllRider,
-        countMeRider: countMeRider,
+        countMeRider: {
+          today: countMeRidertoday,
+          tomonth: countMeRidertomonth,
+          total: countMeRidertotal,
+        },
+        countAllRider: {
+          today: countAllRidertoday,
+          tomonth: countAllRidertomonth,
+          total: countAllRidertotal,
+        },
       },
     });
 });
