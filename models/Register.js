@@ -3,7 +3,8 @@ const db = require("../dbconnection");
 var Register = {
   getcheckEmail: function (email, callback) {
     return db.query(
-      `SELECT COUNT("id") FROM db_project."users" WHERE email = '${email}' AND active = 1 AND is_verified = 1`,
+      `SELECT COUNT("id") FROM db_project."users" WHERE email = $1 AND active = 1 AND is_verified = 1`,
+      [email],
       callback
     );
   },
@@ -15,8 +16,8 @@ var Register = {
     return db.query(
       `INSERT INTO db_project."users"(
         email, firstname, lastname, password, role, active, create_at, update_at, is_verified)
-        VALUES ('${email}', '${firstname}', '${lastname}', '${password}', 1, 1, '${datetime}', '${datetime}', 0)
-        RETURNING id AS user_id`,
+        VALUES ($1, $2, $3, $4, 1, 1, $5, $6, 0) RETURNING id AS user_id`,
+      [email, firstname, lastname, password, datetime, datetime],
       callback
     );
   },

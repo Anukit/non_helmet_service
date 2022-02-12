@@ -10,7 +10,18 @@ var UploadDetectedImage = {
     return db.query(
       `INSERT INTO db_project.object_detection(
         request_user, image_detection, licence_number, latitude, longitude, detection_at, status, active, create_at, update_by, update_at)
-        VALUES ('${user_id}', '${filename}', '${text_license}', '${latitude}', '${longitude}', '${detection_at}', 10, 1, '${datetime}', '${user_id}', '${datetime}')`,
+        VALUES ($1, $2, $3, $4, $5, $6, 10, 1, $7, $8, $9)`,
+      [
+        user_id,
+        filename,
+        text_license,
+        latitude,
+        longitude,
+        detection_at,
+        datetime,
+        user_id,
+        datetime,
+      ],
       callback
     );
   },
@@ -26,7 +37,8 @@ var UploadDetectedImage = {
     return db.query(
       `SELECT id, image_detection, latitude, longitude, detection_at, status, active, update_at
       FROM db_project.object_detection
-      WHERE request_user = '${user_id}'`,
+      WHERE request_user = $1`,
+      [user_id],
       callback
     );
   },

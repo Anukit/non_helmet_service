@@ -8,8 +8,9 @@ var EditProfile = {
     let datetime = data.datetime;
     return db.query(
       `UPDATE db_project."users"
-      SET firstname = '${firstname}', lastname = '${lastname}', update_at = '${datetime}'
-      WHERE id = ${user_id} AND active = 1 AND is_verified = 1`,
+      SET firstname = $1, lastname = $2, update_at = $3
+      WHERE id = $4 AND active = 1 AND is_verified = 1`,
+      [firstname, lastname, datetime, user_id],
       callback
     );
   },
@@ -17,8 +18,9 @@ var EditProfile = {
   updateImage: function (image_profile, user_id, callback) {
     return db.query(
       `UPDATE db_project."users"
-      SET image_profile = '${image_profile}'
-      WHERE id = ${user_id} AND active = 1 AND is_verified = 1`,
+      SET image_profile = $1
+      WHERE id = $2 AND active = 1 AND is_verified = 1`,
+      [image_profile, user_id],
       callback
     );
   },
