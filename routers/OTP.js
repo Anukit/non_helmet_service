@@ -5,7 +5,7 @@ const OTPmodels = require("../models/OTP");
 
 router.post("/PostReqOTP", async function (req, res, next) {
   var email = req.body.email;
-  var type = req.body.type;
+  var type = req.body.type; // 1 = register, 2 = forgot password
   var user_id;
 
   if (type == 1) {
@@ -23,20 +23,24 @@ router.post("/PostReqOTP", async function (req, res, next) {
     var otp = Math.floor(100000 + Math.random() * 900000).toString();
 
     var transporter = nodemailer.createTransport({
-      service: "gmail",
-      port: 587,
+      host: "gmail",
+      service: "Gmail",
+      // port: 587,
       // secure: false,
       // requireTLS: true,
       auth: {
         user: "test084444@gmail.com",
-        pass: "juniortestgmail123456",
+        pass: "Test12345612130",
       },
     });
 
     var mailOptions = {
-      from: "test084444@gmail.com",
+      from: "Non Helmet Riders <test084444@gmail.com>",
       to: email,
-      subject: "รหัส OTP สำหรับสร้างรหัสผ่านใหม่",
+      subject:
+        type == 1
+          ? "รหัส OTP สำหรับสมัครสมาชิก"
+          : "รหัส OTP สำหรับสร้างรหัสผ่านใหม่",
       text: otp,
     };
 
