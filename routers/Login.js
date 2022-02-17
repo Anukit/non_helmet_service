@@ -26,7 +26,18 @@ router.post("/PostLogin", async function (req, res, next) {
           } else res.json({ status: "Failed", data: "Error Get id user" });
         } else res.json({ status: "Failed", data: "Incorrect password" });
       } else res.json({ status: "Failed", data: "Error Check password fail" });
-    } else res.json({ status: "Failed", data: "Invalid email" });
+    } else {
+      let checkEmailVerify = await checkEmailNotVer(email); //เช็คอีเมลที่ยังไม่ verify
+      if (checkEmailVerify.length > 0 && checkEmailVerify[0].id != null) {
+        res.json({
+          status: "Failed",
+          data: "Email is not verified",
+          userID: checkEmailVerify[0].id,
+        });
+      } else {
+        res.json({ status: "Failed", data: "Invalid email" });
+      }
+    }
   }
 });
 
@@ -37,6 +48,24 @@ async function getcheckEmail(email) {
         if (rows != null) {
           resolve(rows.rows);
         } else {
+          resolve(false);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+      resolve(false);
+    }
+  });
+}
+
+async function checkEmailNotVer(email) {
+  return new Promise((resolve, reject) => {
+    try {
+      Login.checkEmailNotVer(email, (err, rows) => {
+        if (rows != null) {
+          resolve(rows.rows);
+        } else {
+          console.log(err);
           resolve(false);
         }
       });

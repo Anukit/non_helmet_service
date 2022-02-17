@@ -39,7 +39,7 @@ router.post("/PostReqOTP", async function (req, res, next) {
       to: email,
       subject:
         type == 1
-          ? "รหัส OTP สำหรับสมัครสมาชิก"
+          ? "รหัส OTP สำหรับยืนยันบัญชีผู้ใช้"
           : "รหัส OTP สำหรับสร้างรหัสผ่านใหม่",
       text: otp,
     };
