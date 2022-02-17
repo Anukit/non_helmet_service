@@ -29,13 +29,13 @@ router.post("/PostReqOTP", async function (req, res, next) {
       // secure: false,
       // requireTLS: true,
       auth: {
-        user: "test084444@gmail.com",
-        pass: "Test12345612130",
+        user: "non.helmet@gmail.com",
+        pass: "Nonhelmet116110",
       },
     });
 
     var mailOptions = {
-      from: "Non Helmet Riders <test084444@gmail.com>",
+      from: "Non Helmet Riders <non.helmet@gmail.com>",
       to: email,
       subject:
         type == 1
