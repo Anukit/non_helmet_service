@@ -17,13 +17,14 @@ router.post("/uploadImageProfile", async function (req, res, next) {
   let storageUploadFile = multer.diskStorage({
     destination: (req, file, cb) => {
       const DIR = `././uploads/profiles`;
-      // fs.exists(DIR, (exist) => {
-      //   if (!exist) {
-      //     return fs.mkdir(DIR, (error) => cb(error, DIR));
-      //   }
-      //   return cb(null, DIR);
-      // });
-      cb(null, DIR);
+      fs.exists(DIR, (exist) => {
+        if (!exist) {
+          return fs.mkdir(DIR, (error) => cb(error, DIR));
+        } else {
+          return cb(null, DIR);
+        }
+      });
+      // cb(null, DIR);
     },
     filename: function (req, file, cb) {
       const fileName = file.originalname;
