@@ -84,7 +84,7 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
 router.get("/getDataDetectedImage/:user_id?", async function (req, res, next) {
   let user_id = req.params.user_id;
   let getdata = await getDataDetectedImage(user_id);
-  if (getdata != false) {
+  if (getdata != null) {
     res.json({ status: "Succeed", data: getdata });
   } else res.json({ status: "Failed", data: "Error" });
 });
@@ -200,12 +200,12 @@ async function getDataDetectedImage(user_id) {
         if (rows != null) {
           resolve(rows.rows);
         } else {
-          resolve(false);
+          resolve(null);
         }
       });
     } catch (err) {
       console.log(err);
-      resolve(false);
+      resolve(null);
     }
   });
 }
