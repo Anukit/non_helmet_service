@@ -35,7 +35,7 @@ router.post("/PostReqOTP", async function (req, res, next) {
     });
 
     var mailOptions = {
-      from: "Non Helmet Detection <non.helmet@gmail.com>",
+      from: "None Helmet Detection <non.helmet@gmail.com>",
       to: email,
       subject:
         type == 1
