@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ManageData = require("../models/ManageData");
 
-//อัปเดตข้อมูลจากตารางเก็บข้อมูลคนไม่ใส่หมวกกันน็อก
+//อัปเดตข้อมูลตาราง object_detection
 router.post("/UpdateDataObj", async function (req, res, next) {
   let updateData = await updateDataObj(req.body);
   if (updateData) {
