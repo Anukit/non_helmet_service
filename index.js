@@ -25,6 +25,8 @@ var DetectedImage = require("./routers/DetectedImage");
 var ChangePassword = require("./routers/ChangePassword");
 var ForgotPassword = require("./routers/Forgotpassword");
 var OTP = require("./routers/OTP");
+var GetDataOther = require("./routers/GetDataOther");
+var ManageData = require("./routers/ManageData");
 
 //use routes
 app.use("/", Home);
@@ -36,5 +38,7 @@ app.use("/DetectedImage", DetectedImage);
 app.use("/ChangePW", ChangePassword);
 app.use("/ForgotPW", ForgotPassword);
 app.use("/OTP", OTP);
+app.use("/GetDataOther", GetDataOther);
+app.use("/ManageData", ManageData);
 
 app.use(express.static("uploads")); //สำหรับโชว์รูปภาพใน service
