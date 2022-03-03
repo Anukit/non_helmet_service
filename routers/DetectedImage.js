@@ -32,7 +32,10 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
         if (today.toDateString() == datetimeDB.toDateString()) {
           countMeRidertoday += 1;
         }
-        if (today.getMonth() == datetimeDB.getMonth()) {
+        if (
+          today.getMonth() == datetimeDB.getMonth() &&
+          today.getFullYear() == datetimeDB.getFullYear()
+        ) {
           countMeRidertomonth += 1;
         }
         countMeRidertotal += 1;
@@ -41,7 +44,10 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
       if (today.toDateString() == datetimeDB.toDateString()) {
         countAllRidertoday += 1;
       }
-      if (today.getMonth() == datetimeDB.getMonth()) {
+      if (
+        today.getMonth() == datetimeDB.getMonth() &&
+        today.getFullYear() == datetimeDB.getFullYear()
+      ) {
         countAllRidertomonth += 1;
       }
       countAllRidertotal += 1;
