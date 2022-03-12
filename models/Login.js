@@ -3,7 +3,7 @@ const db = require("../dbconnection");
 var Login = {
   checkEmailNotVer: function (email, callback) {
     return db.query(
-      `SELECT MAX(id) as id FROM db_project."users" WHERE email = $1 AND is_verified = 0`,
+      `SELECT MAX(id) as id FROM db_project."users" WHERE email = $1 AND active = 1 AND is_verified = 0`,
       [email],
       callback
     );

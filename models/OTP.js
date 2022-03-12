@@ -11,7 +11,7 @@ var GetDataUser = {
   insertOTP: function (user_id, data, otp, callback) {
     let datetime = data.datetime;
     return db.query(
-      `UPDATE db_project."users" SET otp = $1, update_at = $2 WHERE id = $3`,
+      `UPDATE db_project."users" SET otp = $1, update_at = $2 WHERE id = $3 AND active = 1`,
       [otp, datetime, user_id],
       callback
     );
@@ -19,7 +19,7 @@ var GetDataUser = {
   getDataOTP: function (user_id, otp, callback) {
     return db.query(
       `SELECT update_at + (interval '5 minute') AS datetimeotp FROM db_project."users" 
-      WHERE id = $1 AND otp = $2`,
+      WHERE id = $1 AND otp = $2 AND active = 1`,
       [user_id, otp],
       callback
     );
@@ -28,8 +28,8 @@ var GetDataUser = {
     let datetime = data.datetime;
     return db.query(
       `UPDATE db_project."users"
-      SET active = 1 , otp = null, update_at = $1, is_verified = 1
-      WHERE id = $2`,
+      SET otp = null, update_at = $1, is_verified = 1
+      WHERE id = $2 AND active = 1`,
       [datetime, user_id],
       callback
     );

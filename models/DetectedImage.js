@@ -37,7 +37,7 @@ var UploadDetectedImage = {
     return db.query(
       `SELECT id, image_detection, latitude, longitude, detection_at, status, active, update_at
       FROM db_project.object_detection
-      WHERE request_user = $1 ORDER BY update_at DESC`,
+      WHERE request_user = $1 AND active = 1 ORDER BY update_at DESC`,
       [user_id],
       callback
     );
