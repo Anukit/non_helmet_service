@@ -31,5 +31,15 @@ var ManageData = {
       callback
     );
   },
+
+  delDataDetected: function (data, callback) {
+    return db.query(
+      `UPDATE db_project.object_detection
+      SET active = 0, update_by = $1, update_at = $2
+      WHERE id = $3 AND active = 1`,
+      [data.id_admin, data.datetime, data.id_object],
+      callback
+    );
+  },
 };
 module.exports = ManageData;

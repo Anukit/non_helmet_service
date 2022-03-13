@@ -28,7 +28,7 @@ var UploadDetectedImage = {
 
   getAmountRider: function (callback) {
     return db.query(
-      `SELECT request_user, detection_at FROM db_project.object_detection WHERE active = 1`,
+      `SELECT request_user, detection_at, create_at, update_at FROM db_project.object_detection WHERE active = 1`,
       callback
     );
   },

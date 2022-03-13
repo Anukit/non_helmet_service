@@ -9,10 +9,30 @@ var GetDataOther = {
     );
   },
 
+  // getdataObjDetect: function (callback) {
+  //   return db.query(
+  //     `SELECT id, request_user, image_detection, licence_number, latitude, longitude, detection_at, status, active, create_at, update_by, update_at
+  //     FROM db_project.object_detection WHERE active = 1 ORDER BY update_at DESC`,
+  //     callback
+  //   );
+  // },
   getdataObjDetect: function (callback) {
     return db.query(
-      `SELECT id, request_user, image_detection, licence_number, latitude, longitude, detection_at, status, active, create_at, update_by, update_at
-      FROM db_project.object_detection WHERE active = 1 ORDER BY update_at DESC`,
+      `SELECT a.id, b.firstname, b.lastname, b.email, a.image_detection, a.licence_number, a.latitude, a.longitude, a.detection_at, a.status, a.create_at, a.update_by, a.update_at
+      FROM db_project.object_detection as a
+			JOIN db_project.users as b ON a.request_user = b.id
+			WHERE a.active = 1 AND b.active = 1 ORDER BY update_at DESC`,
+      callback
+    );
+  },
+
+  searchdataObjDetect: function (search_value, callback) {
+    return db.query(
+      `SELECT a.id, b.firstname, b.lastname, b.email, a.image_detection, a.licence_number, a.latitude, a.longitude, a.detection_at, a.status, a.create_at, a.update_by, a.update_at
+      FROM db_project.object_detection as a
+			JOIN db_project.users as b ON a.request_user = b.id
+			WHERE a.active = 1 AND b.active = 1 AND (b.firstname LIKE '%${search_value}%' OR b.lastname LIKE '%${search_value}%' OR a.licence_number LIKE '%${search_value}%') 
+      ORDER BY update_at DESC`,
       callback
     );
   },
@@ -25,6 +45,10 @@ var GetDataOther = {
       WHERE a.active = 1 AND b.active = 1 ORDER BY a.update_at DESC`,
       callback
     );
+  },
+
+  getstaticFromStatus: function (callback) {
+    return db.query(``, callback);
   },
 };
 

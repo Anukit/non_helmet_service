@@ -13,11 +13,15 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
 
   //ผู้ใช้คน ๆ นั้น
   let countMeRidertoday = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมารายวัน
+  let countMeRidertoweek = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมารายสัปดาห์
   let countMeRidertomonth = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมารายเดือน
+  let countMeRidertoyear = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมารายปี
   let countMeRidertotal = 0; //จำนวนรถที่ผู้ใช้แต่ละอัปมาทั้งหมด
   //ผู้ใช้ทั้งหมด
   let countAllRidertoday = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมารายวัน
+  let countAllRidertoweek = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมารายสัปดาห์
   let countAllRidertomonth = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมารายเดือน
+  let countAllRidertoyear = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมารายปี
   let countAllRidertotal = 0; //จำนวนรถที่ผู้ใช้ทั้งหมดอัปมาทั้งหมด
 
   let data = await getAmountRider();
@@ -25,31 +29,55 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
 
   if (data.length > 0) {
     for (let index = 0; index < data.length; index++) {
-      let datetimeDB = new Date(data[index]["detection_at"]);
+      let datetimeDB = new Date(data[index]["create_at"]);
+      let chackWeek = new Date(data[index]["create_at"]);
+      chackWeek.setDate(chackWeek.getDate() + 7);
 
+      /////////////////////////////ผู้ใช้คนนั้น ๆ/////////////////////////////
       if (data[index]["request_user"] == user_id) {
-        //ผู้ใช้คนนั้น ๆ
+        //รายวัน
         if (today.toDateString() == datetimeDB.toDateString()) {
           countMeRidertoday += 1;
         }
+        //รายสัปดาห์
+        if (chackWeek > today) {
+          countMeRidertoweek += 1;
+        }
+        //รายเดือน
         if (
           today.getMonth() == datetimeDB.getMonth() &&
           today.getFullYear() == datetimeDB.getFullYear()
         ) {
           countMeRidertomonth += 1;
         }
+        //รายปี
+        if (today.getFullYear() == datetimeDB.getFullYear()) {
+          countMeRidertoyear += 1;
+        }
+        //ทั้งหมด
         countMeRidertotal += 1;
       }
-      //ผู้ใช้ทั้งหมด
+      /////////////////////////////ผู้ใช้ทั้งหมด///////////////////////////////
+      //รายวัน
       if (today.toDateString() == datetimeDB.toDateString()) {
         countAllRidertoday += 1;
       }
+      //รายสัปดาห์
+      if (chackWeek > today) {
+        countAllRidertoweek += 1;
+      }
+      //รายเดือน
       if (
         today.getMonth() == datetimeDB.getMonth() &&
         today.getFullYear() == datetimeDB.getFullYear()
       ) {
         countAllRidertomonth += 1;
       }
+      //รายปี
+      if (today.getFullYear() == datetimeDB.getFullYear()) {
+        countAllRidertoyear += 1;
+      }
+      //ทั้งหมด
       countAllRidertotal += 1;
     }
 
@@ -58,12 +86,16 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
       data: {
         countMeRider: {
           today: countMeRidertoday,
+          toweek: countMeRidertoweek,
           tomonth: countMeRidertomonth,
+          toyear: countMeRidertoyear,
           total: countMeRidertotal,
         },
         countAllRider: {
           today: countAllRidertoday,
+          toweek: countAllRidertoweek,
           tomonth: countAllRidertomonth,
+          toyear: countAllRidertoyear,
           total: countAllRidertotal,
         },
       },
@@ -74,12 +106,16 @@ router.get("/getAmountRider/:user_id?", async function (req, res, next) {
       data: {
         countMeRider: {
           today: countMeRidertoday,
+          toweek: countMeRidertoweek,
           tomonth: countMeRidertomonth,
+          toyear: countMeRidertoyear,
           total: countMeRidertotal,
         },
         countAllRider: {
           today: countAllRidertoday,
+          toweek: countAllRidertoweek,
           tomonth: countAllRidertomonth,
+          toyear: countAllRidertoyear,
           total: countAllRidertotal,
         },
       },
