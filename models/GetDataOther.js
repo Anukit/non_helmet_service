@@ -50,7 +50,9 @@ var GetDataOther = {
   },
 
   getstaticFromStatus: function (callback) {
-    return db.query(``, callback);
+    return db.query(`SELECT status,count(status) FROM db_project.object_detection
+    WHERE active = 1
+    GROUP BY Status`, callback);
   },
 };
 
