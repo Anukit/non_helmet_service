@@ -3,8 +3,8 @@ const db = require("../dbconnection");
 var GetDataOther = {
   getdataUserAll: function (callback) {
     return db.query(
-      `SELECT u.id , u.email , u.firstname , u.lastname , u.image_profile , u.role , u.create_at , u.update_at , count(u.id) as count_upload FROM users as u
-      LEFT JOIN object_detection as o ON o.request_user = u.id
+      `SELECT u.id , u.email , u.firstname , u.lastname , u.image_profile , u.role , u.create_at , u.update_at , count(u.id) as count_upload FROM db_project.users as u
+      LEFT JOIN db_project.object_detection as o ON o.request_user = u.id
       WHERE u.active = 1 AND o.active = 1
       GROUP BY u.id`,
       callback
