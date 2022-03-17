@@ -50,9 +50,40 @@ var GetDataOther = {
   },
 
   getstaticFromStatus: function (callback) {
-    return db.query(`SELECT status,count(status) FROM db_project.object_detection
-    WHERE active = 1
-    GROUP BY Status`, callback);
+    return db.query(
+      `SELECT
+      (SELECT 10 as status), 
+       (SELECT count(id) FROM db_project.object_detection WHERE (NOW() :: DATE = update_at :: DATE) AND status = 10 AND active = 1) as today, 
+       (SELECT count(id) FROM db_project.object_detection WHERE ((update_at + interval '7 days') >= now()) AND status = 10 AND active = 1) as toweek,
+       (SELECT count(id) FROM db_project.object_detection WHERE ((to_char(update_at, 'YYYY-MM')) = (to_char(now(), 'YYYY-MM'))) AND status = 10 AND active = 1) as tomonth,
+       (SELECT count(id) FROM db_project.object_detection WHERE((to_char(update_at, 'YYYY')) = (to_char(now(), 'YYYY'))) AND status = 10 AND active = 1) as toyear,
+       (SELECT count(id) FROM db_project.object_detection WHERE  status = 10 AND active = 1) as total
+       UNION
+       SELECT 
+       (SELECT 20 as status), 
+       (SELECT count(id) FROM db_project.object_detection WHERE (NOW() :: DATE = update_at :: DATE) AND status = 20 AND active = 1) as today, 
+       (SELECT count(id) FROM db_project.object_detection WHERE ((update_at + interval '7 days') >= now()) AND status = 20 AND active = 1) as toweek,
+       (SELECT count(id) FROM db_project.object_detection WHERE ((to_char(update_at, 'YYYY-MM')) = (to_char(now(), 'YYYY-MM'))) AND status = 20 AND active = 1) as tomonth,
+       (SELECT count(id) FROM db_project.object_detection WHERE((to_char(update_at, 'YYYY')) = (to_char(now(), 'YYYY'))) AND status = 20 AND active = 1) as toyear,
+       (SELECT count(id) FROM db_project.object_detection WHERE  status = 20 AND active = 1) as total
+       UNION
+        SELECT 
+       (SELECT 30 as status), 
+       (SELECT count(id) FROM db_project.object_detection WHERE (NOW() :: DATE = update_at :: DATE) AND status = 30 AND active = 1) as today, 
+       (SELECT count(id) FROM db_project.object_detection WHERE ((update_at + interval '7 days') >= now()) AND status = 30 AND active = 1) as toweek,
+       (SELECT count(id) FROM db_project.object_detection WHERE ((to_char(update_at, 'YYYY-MM')) = (to_char(now(), 'YYYY-MM'))) AND status = 30 AND active = 1) as tomonth,
+       (SELECT count(id) FROM db_project.object_detection WHERE((to_char(update_at, 'YYYY')) = (to_char(now(), 'YYYY'))) AND status = 30 AND active = 1) as toyear,
+       (SELECT count(id) FROM db_project.object_detection WHERE  status = 30 AND active = 1) as total
+       UNION
+        SELECT 
+       (SELECT 40 as status), 
+       (SELECT count(id) FROM db_project.object_detection WHERE (NOW() :: DATE = update_at :: DATE) AND status = 40 AND active = 1) as today, 
+       (SELECT count(id) FROM db_project.object_detection WHERE ((update_at + interval '7 days') >= now()) AND status = 40 AND active = 1) as toweek,
+       (SELECT count(id) FROM db_project.object_detection WHERE ((to_char(update_at, 'YYYY-MM')) = (to_char(now(), 'YYYY-MM'))) AND status = 40 AND active = 1) as tomonth,
+       (SELECT count(id) FROM db_project.object_detection WHERE((to_char(update_at, 'YYYY')) = (to_char(now(), 'YYYY'))) AND status = 40 AND active = 1) as toyear,
+       (SELECT count(id) FROM db_project.object_detection WHERE  status = 40 AND active = 1) as total
+       ORDER BY status ASC`,callback
+    );
   },
 };
 
