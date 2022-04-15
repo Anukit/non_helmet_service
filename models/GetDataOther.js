@@ -11,13 +11,6 @@ var GetDataOther = {
     );
   },
 
-  // getdataObjDetect: function (callback) {
-  //   return db.query(
-  //     `SELECT id, request_user, image_detection, licence_number, latitude, longitude, detection_at, status, active, create_at, update_by, update_at
-  //     FROM db_project.object_detection WHERE active = 1 ORDER BY update_at DESC`,
-  //     callback
-  //   );
-  // },
   getdataObjDetect: function (callback) {
     return db.query(
       `SELECT a.id, b.firstname, b.lastname, b.email, a.image_detection, a.licence_number, a.latitude, a.longitude, a.detection_at, a.status, a.create_at, a.update_by, a.update_at
@@ -82,7 +75,8 @@ var GetDataOther = {
        (SELECT count(id) FROM db_project.object_detection WHERE ((to_char(update_at, 'YYYY-MM')) = (to_char(now(), 'YYYY-MM'))) AND status = 40 AND active = 1) as tomonth,
        (SELECT count(id) FROM db_project.object_detection WHERE((to_char(update_at, 'YYYY')) = (to_char(now(), 'YYYY'))) AND status = 40 AND active = 1) as toyear,
        (SELECT count(id) FROM db_project.object_detection WHERE  status = 40 AND active = 1) as total
-       ORDER BY status ASC`,callback
+       ORDER BY status ASC`,
+      callback
     );
   },
 };

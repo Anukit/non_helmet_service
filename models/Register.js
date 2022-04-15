@@ -1,13 +1,6 @@
 const db = require("../dbconnection");
 
 var Register = {
-  // getcheckEmail: function (email, callback) {
-  //   return db.query(
-  //     `SELECT COUNT("id") FROM db_project."users" WHERE email = $1 AND active = 1 AND is_verified = 1`,
-  //     [email],
-  //     callback
-  //   );
-  // },
   postdataUser: function (data, password, callback) {
     let email = data.email;
     let firstname = data.firstname;

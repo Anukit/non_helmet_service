@@ -33,23 +33,6 @@ router.post("/PostRegister", async function (req, res, next) {
   }
 });
 
-// async function getcheckEmail(email) {
-//   return new Promise((resolve, reject) => {
-//     try {
-//       Register.getcheckEmail(email, (err, rows) => {
-//         if (rows != null) {
-//           resolve(rows.rows);
-//         } else {
-//           resolve(false);
-//         }
-//       });
-//     } catch (err) {
-//       console.log(err);
-//       resolve(false);
-//     }
-//   });
-// }
-
 async function postdataUser(data, password) {
   return new Promise((resolve, reject) => {
     try {

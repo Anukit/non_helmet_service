@@ -123,23 +123,6 @@ router.post("/PostCheckOTP", async function (req, res, next) {
   }
 });
 
-// async function getcheckEmail(email) {
-//   return new Promise((resolve, reject) => {
-//     try {
-//       OTPmodels.getcheckEmail(email, (err, rows) => {
-//         if (rows != null) {
-//           resolve(rows.rows);
-//         } else {
-//           resolve(false);
-//         }
-//       });
-//     } catch (err) {
-//       console.log(err);
-//       resolve(false);
-//     }
-//   });
-// }
-
 async function insertOTP(user_id, data, otp) {
   return new Promise((resolve, reject) => {
     try {

@@ -41,41 +41,6 @@ router.post("/PostLogin", async function (req, res, next) {
   }
 });
 
-// async function getcheckEmail(email) {
-//   return new Promise((resolve, reject) => {
-//     try {
-//       Register.getcheckEmail(email, (err, rows) => {
-//         if (rows != null) {
-//           resolve(rows.rows);
-//         } else {
-//           resolve(false);
-//         }
-//       });
-//     } catch (err) {
-//       console.log(err);
-//       resolve(false);
-//     }
-//   });
-// }
-
-// async function checkEmailNotVer(email) {
-//   return new Promise((resolve, reject) => {
-//     try {
-//       Login.checkEmailNotVer(email, (err, rows) => {
-//         if (rows != null) {
-//           resolve(rows.rows);
-//         } else {
-//           console.log(err);
-//           resolve(false);
-//         }
-//       });
-//     } catch (err) {
-//       console.log(err);
-//       resolve(false);
-//     }
-//   });
-// }
-
 async function checkPassword(email) {
   return new Promise((resolve, reject) => {
     try {
