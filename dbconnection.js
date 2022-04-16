@@ -9,15 +9,5 @@ const db = new Client({
   database: "db_non_helmet",
 });
 
-//Database จริง
-/* const db = new Client({
-  host: "128.199.96.80",
-  user: "postgres",
-  port: 5432,
-  password: "postgres",
-  database: "db_non_helmet",
-  ssl: { rejectUnauthorized: false },
-}); */
-
 db.connect();
 module.exports = db;
