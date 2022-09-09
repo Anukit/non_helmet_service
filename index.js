@@ -42,6 +42,6 @@ app.use("/GetDataOther", GetDataOther);
 app.use("/ManageData", ManageData);
 
 app.use(express.static("uploads")); //สำหรับโชว์รูปภาพใน service
-
+//aaa
 
 ///////test2/////////
