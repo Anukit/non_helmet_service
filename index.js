@@ -41,7 +41,11 @@ app.use("/OTP", OTP);
 app.use("/GetDataOther", GetDataOther);
 app.use("/ManageData", ManageData);
 
+<<<<<<< HEAD
 app.use(express.static("uploads")); //สำหรับโชว์รูปภาพใน service
 
 
 ///////test2/////////
+=======
+app.use(express.static("uploads")); //สำหรับโชว์รูปภาพใน service
+>>>>>>> 029970c8b425efbe1099fe0a05633423c4cc2567
