@@ -43,5 +43,3 @@ app.use("/ManageData", ManageData);//test
 
 app.use(express.static("uploads")); //สำหรับโชว์รูปภาพใน service
 //aaa
-
-///////test2/////////
