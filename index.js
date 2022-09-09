@@ -39,7 +39,7 @@ app.use("/ChangePW", ChangePassword);
 app.use("/ForgotPW", ForgotPassword);
 app.use("/OTP", OTP);
 app.use("/GetDataOther", GetDataOther);
-app.use("/ManageData", ManageData);
+app.use("/ManageData", ManageData);//test
 
 app.use(express.static("uploads")); //สำหรับโชว์รูปภาพใน service
 
